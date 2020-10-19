@@ -1,0 +1,7 @@
+password:
+  minimumLength: 5
+  maximumLength: 12
+  sequenceRegex: (.+)\1
+  charactersErrorMessage: Your password must consist of a mixture of lowercase letters and numerical digits only, with at least one of each.
+  lengthErrorMessage: Your password must be between 5 and 12 characters in length.
+  sequenceErrorMessage: Your password must not contain any sequence of characters immediately followed by the same sequence.
