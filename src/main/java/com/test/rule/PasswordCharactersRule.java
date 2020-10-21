@@ -1,12 +1,18 @@
 package com.test.rule;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PasswordCharactersRule implements PasswordRule {
+@ConfigurationProperties(prefix = "password-rule.characters")
+public class PasswordCharactersRule extends PasswordRule {
 	
-	private String charactersErrorMessage;
-	
+	/**
+	 * Checks if password contains lowercase letters and numerical digits only, with at least one of each.
+	 *
+	 * @param password password to be validated.
+	 * @return true if password is valid.
+	 */
 	@Override
 	public boolean isValid(String password) {
 		char[] chars = password.toCharArray();
@@ -26,15 +32,6 @@ public class PasswordCharactersRule implements PasswordRule {
 		}
 		
 		return hasLowercaseLetter && hasDigit;
-	}
-	
-	@Override
-	public String getErrorMessage() {
-		return charactersErrorMessage;
-	}
-	
-	public void setCharactersErrorMessage(String charactersErrorMessage) {
-		this.charactersErrorMessage = charactersErrorMessage;
 	}
 	
 }

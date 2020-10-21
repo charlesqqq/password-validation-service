@@ -14,7 +14,13 @@ public class PasswordValidationController {
 	@Autowired
 	private PasswordValidationService passwordValidationService;
 	
-	@GetMapping("/validatePassword")
+	/**
+	 * Handles requests to validate password.
+	 *
+	 * @param password password to be validated
+	 * @return error messages or empty if password is valid.
+	 */
+	@GetMapping("${validatePasswordURL}")
 	public Set<String> validatePassword(@RequestParam(defaultValue = "") String password) {
 		return passwordValidationService.validate(password);
 	}

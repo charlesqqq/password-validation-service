@@ -1,31 +1,29 @@
 package com.test.rule;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
 
 @Component
-public class PasswordSequenceRule implements PasswordRule {
+@ConfigurationProperties(prefix = "password-rule.sequence")
+public class PasswordSequenceRule extends PasswordRule {
 	
-	private String sequenceRegex;
-	private String sequenceErrorMessage;
+	private String regex;
 	
+	/**
+	 * Checks if password does not match {@link #regex}.
+	 *
+	 * @param password password to be validated.
+	 * @return true if password is valid.
+	 */
 	@Override
 	public boolean isValid(String password) {
-		return !Pattern.compile(sequenceRegex).matcher(password).find();
+		return !Pattern.compile(regex).matcher(password).find();
 	}
 	
-	@Override
-	public String getErrorMessage() {
-		return sequenceErrorMessage;
-	}
-	
-	public void setSequenceRegex(String sequenceRegex) {
-		this.sequenceRegex = sequenceRegex;
-	}
-	
-	public void setSequenceErrorMessage(String sequenceErrorMessage) {
-		this.sequenceErrorMessage = sequenceErrorMessage;
+	public void setRegex(String regex) {
+		this.regex = regex;
 	}
 	
 }

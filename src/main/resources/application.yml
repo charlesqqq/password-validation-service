@@ -1,7 +1,20 @@
-password:
-  minimumLength: 5
-  maximumLength: 12
-  sequenceRegex: (.+)\1
-  charactersErrorMessage: Your password must consist of a mixture of lowercase letters and numerical digits only, with at least one of each.
-  lengthErrorMessage: Your password must be between 5 and 12 characters in length.
-  sequenceErrorMessage: Your password must not contain any sequence of characters immediately followed by the same sequence.
+validatePasswordURL: /validatePassword
+
+passwordRule:
+  characters:
+    errorMessage: Your password must consist of a mixture of lowercase letters and numerical digits only, with at least one of each.
+  length:
+    minimum: 5
+    maximum: 12
+    errorMessage: Your password must be between 5 and 12 characters in length.
+  sequence:
+    regex: (.+)\1
+    errorMessage: Your password must not contain any sequence of characters immediately followed by the same sequence.
+
+passwordTestData:
+  valid: abc123, 123abc, abc123abc, 123abc123
+  invalid:
+    all: 11Ab, abcabc123456789XYZ
+    characters: aBc123, abc_123
+    length: ab12, abc0123456789
+    sequence: abcabc123, abc1212cd, abcdd123

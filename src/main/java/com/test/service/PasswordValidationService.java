@@ -13,6 +13,12 @@ public class PasswordValidationService {
 	@Autowired
 	private Set<PasswordRule> passwordRules;
 	
+	/**
+	 * Validate password with {@link #passwordRules}.
+	 *
+	 * @param password password to be validated.
+	 * @return error messages or empty if password is valid.
+	 */
 	public Set<String> validate(String password) {
 		Set<String> errorMessages = new HashSet<>();
 		

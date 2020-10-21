@@ -1,35 +1,33 @@
 package com.test.rule;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PasswordLengthRule implements PasswordRule {
+@ConfigurationProperties(prefix = "password-rule.length")
+public class PasswordLengthRule extends PasswordRule {
 	
-	private int minimumLength;
-	private int maximumLength;
-	private String lengthErrorMessage;
+	private int minimum;
+	private int maximum;
 	
+	/**
+	 * Checks if password is between {@link #minimum} and {@link #maximum} characters in length.
+	 *
+	 * @param password password to be validated.
+	 * @return true if password is valid.
+	 */
 	@Override
 	public boolean isValid(String password) {
 		int length = password.length();
-		return length >= minimumLength && length <= maximumLength;
+		return length >= minimum && length <= maximum;
 	}
 	
-	@Override
-	public String getErrorMessage() {
-		return lengthErrorMessage;
+	public void setMinimum(int minimum) {
+		this.minimum = minimum;
 	}
 	
-	public void setMinimumLength(int minimumLength) {
-		this.minimumLength = minimumLength;
-	}
-	
-	public void setMaximumLength(int maximumLength) {
-		this.maximumLength = maximumLength;
-	}
-	
-	public void setLengthErrorMessage(String lengthErrorMessage) {
-		this.lengthErrorMessage = lengthErrorMessage;
+	public void setMaximum(int maximum) {
+		this.maximum = maximum;
 	}
 	
 }

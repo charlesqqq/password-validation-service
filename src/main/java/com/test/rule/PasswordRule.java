@@ -1,12 +1,17 @@
 package com.test.rule;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-@ConfigurationProperties(prefix = "password")
-public interface PasswordRule {
+public abstract class PasswordRule {
 	
-	boolean isValid(String password);
+	private String errorMessage;
 	
-	String getErrorMessage();
+	public abstract boolean isValid(String password);
+	
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+	
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
 	
 }
